@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import createHistory from 'history/createBrowserHistory';
+import qs from 'query-string';
 import Smurf from './Smurf';
 import { Row, Col } from 'reactstrap';
 import SmurfList from "./SmurfList";
 import { deleteSmurfs } from '../services/smurf-service';
+
+const history = createHistory();
 
 let startX;
 let startWidth;
@@ -17,6 +21,16 @@ export default class App extends Component {
 		isEditMode: false,
 		deleting: false
 	};
+
+	componentDidMount() {
+		const query = qs.parse(history.location.search);
+		const smurf = this.props.data.find(smurf => smurf.name === query.name);
+		if (smurf) {
+			this.setState({
+				activeItem: smurf
+			});
+		}
+	}
 
 	onItemClick = (item) => {
 		const newData = [...this.state.data];
