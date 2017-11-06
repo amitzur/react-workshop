@@ -96,7 +96,8 @@ export default class App extends Component {
 						canDelete={selectedItems.length > 0}
 						selectedItems={selectedItems}
 						onEdit={this.onEdit}
-						isEditMode={isEditMode}/>
+						isEditMode={isEditMode}
+						activeItem={activeItem}/>
 					{ deleting && <div className="overlay"/> }
 				</Col>
 				<Col style={{flex: '0 0 5px', cursor: 'move'}} onMouseDown={this.onDragStart}/>
