@@ -1,22 +1,29 @@
-import store from './store';
+import { action } from 'mobx';
 
-let startX;
-let startWidth;
+class Drag {
+	startX;
+	startWidth;
+	store;
 
-const onDragStart = (e) => {
-	startX = e.pageX;
-	startWidth = store.width;
-	document.addEventListener("mousemove", onDragMove);
-	document.addEventListener("mouseup", onDragEnd);
-};
+	constructor(store) {
+		this.store = store;
+	}
 
-const onDragMove = (e) => {
-	store.setWidth(startWidth + e.pageX - startX);
-};
+	@action onDragStart = (e) => {
+    this.startX = e.pageX;
+    this.startWidth = this.store.width;
+    document.addEventListener("mousemove", this.onDragMove);
+    document.addEventListener("mouseup", this.onDragEnd);
+	};
 
-const onDragEnd = (e) => {
-	document.removeEventListener("mousemove", onDragMove);
-	document.removeEventListener("mouseup", onDragEnd);
-};
+	@action onDragMove = (e) => {
+    this.store.setWidth(this.startWidth + e.pageX - this.startX);
+	};
 
-export default onDragStart;
+	@action onDragEnd = (e) => {
+    document.removeEventListener("mousemove", this.onDragMove);
+    document.removeEventListener("mouseup", this.onDragEnd);
+	}
+}
+
+export default Drag;

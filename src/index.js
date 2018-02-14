@@ -4,10 +4,10 @@ import { AppContainer } from 'react-hot-loader'
 import App from './components/App';
 import './sass/style.scss';
 import 'font-awesome/scss/font-awesome.scss';
-import smurfs from './data/smurfs.json';
-import store from './store';
+import AppStore from './stores/AppStore';
 
-store.data = smurfs;
+const store = new AppStore();
+window.__s = store;
 
 const div = document.createElement('div');
 div.style.height = '100%';
@@ -17,7 +17,7 @@ document.body.appendChild(div);
 const render = Component => {
 	ReactDOM.render(
 		<AppContainer>
-			<Component />
+			<Component store={store} />
 		</AppContainer>,
 		div
 	)
