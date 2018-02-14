@@ -36,6 +36,7 @@
     "mobx-react": "^4.3.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "reactstrap": "^5.0.0-alpha.3"
+    "reactstrap": "^5.0.0-alpha.3",
+    "shortid": "^2.2.8"
   }
 }

@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react';
 import Smurf from './Smurf';
 import { Row, Col } from 'reactstrap';
 import SmurfList from "./SmurfList";
+import Spinner from './Spinner';
 
 
 const App = ({
 	store: {
 		smurfsStore,
 		width,
-		startDrag
+		startDrag,
+		loading
 	}
 }) => {
+	if (loading) return <div className="d-flex pos-absolute h-100 justify-content-center align-items-center bg-white">
+		<Spinner />
+	</div>;
+
 	const {
 		activeItem, deleting
 	} = smurfsStore;

@@ -36,3 +36,21 @@ body {
     left: 0;
     background: rgba(255,255,255,0.4);
 }
+
+.spinner {
+    animation-name: rotator;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotator {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(270deg); }
+}
+
+.spinner-circle {
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}

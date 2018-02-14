@@ -1,20 +1,22 @@
-import { observable, action } from 'mobx';
+import { observable, action, runInAction } from 'mobx';
 import { getSmurfs } from '../services/smurf-service';
 import Smurfs from './Smurfs';
-import Drag from '../drag';
+import Drag from './Drag';
 
 class AppStore {
   smurfsStore;
   dragStore;
+  @observable loading = true;
   @observable width = 300;
 
   constructor() {
     this.smurfsStore = new Smurfs();
     this.dragStore = new Drag(this);
 
-    getSmurfs().then(smurfs => {
+    getSmurfs().then(smurfs => runInAction(() => {
       this.smurfsStore.setSmurfs(smurfs);
-    });
+      this.loading = false;
+    }));
   }
 
   @action setWidth = (width) => {
